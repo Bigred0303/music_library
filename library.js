@@ -20,6 +20,40 @@ const library = {
     name: "Other Playlist",
     tracks: ["t03"]
   }
+  },
+  printP: () => {
+    for (const playlist in library.playlists) {
+      console.log(library.playlists[playlist].id + ": " + library.playlists[playlist].name + " - " + library.playlists[playlist].tracks.length + " tracks");
+    }
+  },
+  printT: () => {
+    for (const track in library.tracks) {
+      console.log(library.tracks[track].id + ": " + library.tracks[track].name + " by " + library.tracks[track].artist + " (" + library.tracks[track].album + ")");
+    }
+  },
+  printP1: playlistId => {
+    let i = 0;
+    console.log(library.playlists[playlistId].id + ": " + library.playlists[playlistId].name + " - " + library.playlists[playlistId].tracks.length + " tracks");
+    for (const track in library.tracks) {
+      if (library.tracks[track].id === library.playlists[playlistId].tracks[i]) {
+        console.log(library.tracks[track].id + ": " + library.tracks[track].name + " by " + library.tracks[track].artist + " (" + library.tracks[track].album + ")");
+      }
+      i++;
+    }
+  },
+  addTtoP: (trackId, playlistId) => {
+    library.playlists[playlistId].tracks.push(trackId);
+    console.log(library.playlists[playlistId].tracks);
+  },
+  addT: (name, artist, album) => {
+    const newTrackId = `t0${Object.keys(library.tracks).length + 1}`;
+    library.tracks[newTrackId] = { id: newTrackId, name: name, artist: artist, album: album };
+    console.log(library.tracks);
+  },
+  addP: (name) => {
+    const newPlaylistId = `p0${Object.keys(library.playlists).length + 1}`;
+    library.playlists[newPlaylistId] = { id: newPlaylistId, name: name};
+    console.log(library.playlists);
   }
 };
 
@@ -103,5 +137,5 @@ const printSearchResults = function(query) {
 
 };
 // printPlaylists()
-// printTracks()
+library.print();
 
