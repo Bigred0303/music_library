@@ -31,7 +31,9 @@ const library = {
 // p01: Coding Music - 2 tracks
 // p02: Other Playlist - 1 tracks
 const printPlaylists = function() {
-
+       for (const playlist in library.playlists) {
+              console.log(library.playlists[playlist].id + ": " + library.playlists[playlist].name + " - " + library.playlists[playlist].tracks.length + " tracks")
+       }
 }
 
 
@@ -40,7 +42,9 @@ const printPlaylists = function() {
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 // t03: Four Thirty-Three by John Cage (Woodstock 1952)
 const printTracks = function() {
-
+       for (const track in library.tracks) {
+              console.log(library.tracks[track].id + ": " + library.tracks[track].name+ " by " + library.tracks[track].artist + " (" + library.tracks[track].album + ")")
+       }
 }
 
 
@@ -49,13 +53,21 @@ const printTracks = function() {
 // t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 const printPlaylist = function(playlistId) {
-
+       let i = 0;
+       console.log(library.playlists[playlistId].id + ": " + library.playlists[playlistId].name + " - " + library.playlists[playlistId].tracks.length + " tracks");
+       for (const track in library.tracks) {              
+              if (library.tracks[track].id === library.playlists[playlistId].tracks[i]) {
+                     console.log(library.tracks[track].id + ": " + library.tracks[track].name + " by " + library.tracks[track].artist + " (" + library.tracks[track].album + ")")
+              }
+              i++;      
+       }
 }
 
 
 // adds an existing track to an existing playlist
 const addTrackToPlaylist = function(trackId, playlistId) {
-
+       library.playlists[playlistId].tracks.push(trackId);
+       console.log(library.playlists[playlistId].tracks);
 }
 
 
@@ -68,13 +80,17 @@ const generateUid = function() {
 
 // adds a track to the library
 const addTrack = function(name, artist, album) {
-
+       const newTrackId = `t0${Object.keys(library.tracks).length + 1}`;
+       library.tracks[newTrackId] = { id: newTrackId, name: name, artist: artist, album: album };
+       console.log(library.tracks);
 }
 
 
 // adds a playlist to the library
 const addPlaylist = function(name) {
-
+       const newPlaylistId = `p0${Object.keys(library.playlists).length + 1}`;
+       library.playlists[newPlaylistId] = { id: newPlaylistId, name: name};
+       console.log(library.playlists);
 }
 
 
@@ -86,3 +102,6 @@ const addPlaylist = function(name) {
 const printSearchResults = function(query) {
 
 }
+// printPlaylists()
+// printTracks()
+
